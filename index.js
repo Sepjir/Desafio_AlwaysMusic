@@ -16,8 +16,10 @@ const comandos = process.argv.slice(2)
 //Estableciendo la nueva instancia Client con el objeto de configuración
 const client = new Client(config)
 
+//usando el metodo connect() para conectar a postgreSQL
 client.connect()
 
+// función añadir estudiante con el comando: node index.js nuevo 'nombre' 'rut' curso nivel
 async function addUser() {
     const res = await client.query(`insert into usuario (nombre, rut, curso, nivel) values ('${comandos[1]}', '${comandos[2]}', '${comandos[3]}', '${comandos[4]}') RETURNING *;`)
     console.log(`El estudiante "${comandos[1]}" ha sido agregado exitosamente`)
